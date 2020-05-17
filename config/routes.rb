@@ -2,10 +2,9 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   namespace :admin do
+    resources :projects
+    resources :teams
     resources :users
-    resources :announcements
-    resources :notifications
-    resources :services
 
     root to: "users#index"
   end

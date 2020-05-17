@@ -7,4 +7,7 @@ class User < ApplicationRecord
 
   has_many :notifications, foreign_key: :recipient_id
   has_many :services
+
+  belongs_to :team, optional: true
+  has_one :team_to_lead, class_name: 'Team', foreign_key: :leader_id
 end

@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Steps to set up this project
 
-Things you may want to cover:
+* bundle install
 
-* Ruby version
+* rails db:create
 
-* System dependencies
+* rails db:migrate
 
-* Configuration
+* rails db:seed
 
-* Database creation
+* rails s
 
-* Database initialization
+    You can then login with the Admin user credentials that are:
+    Email: `admin@example.com`
+    password: `password`
+    
+* You can got to admin pannel by clicking on the `Admin Area` button in top right menu or goto usrl `localhost:3000/admin`
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+From there you can assign Employees to a Team, and then Teams to Projects and so on...
+    

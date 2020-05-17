@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_100858) do
+ActiveRecord::Schema.define(version: 2020_05_17_114531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,22 @@ ActiveRecord::Schema.define(version: 2020_05_17_100858) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "project_teams", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_project_teams_on_project_id"
+    t.index ["team_id"], name: "index_project_teams_on_team_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.text "discription"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "services", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "provider"
@@ -60,6 +76,14 @@ ActiveRecord::Schema.define(version: 2020_05_17_100858) do
     t.index ["user_id"], name: "index_services_on_user_id"
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.string "title"
+    t.text "discription"
+    t.integer "leader_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -72,9 +96,14 @@ ActiveRecord::Schema.define(version: 2020_05_17_100858) do
     t.boolean "admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "team_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["team_id"], name: "index_users_on_team_id"
   end
 
+  add_foreign_key "project_teams", "projects"
+  add_foreign_key "project_teams", "teams"
   add_foreign_key "services", "users"
+  add_foreign_key "users", "teams"
 end
